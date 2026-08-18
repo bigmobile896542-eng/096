@@ -1,0 +1,20 @@
+local ServerStorage = game:GetService("ServerStorage")
+local Players = game:GetService("Players")
+
+local function giveVoid(player)
+	local item = ServerStorage:FindFirstChild("Void")
+
+	if not item then
+		warn("ไม่พบไอเท็ม Void ใน ServerStorage")
+		return
+	end
+
+	local clone = item:Clone()
+	clone.Parent = player:WaitForChild("Backpack")
+end
+
+Players.PlayerAdded:Connect(function(player)
+	player.CharacterAdded:Connect(function()
+		giveVoid(player)
+	end)
+end)
